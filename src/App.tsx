@@ -1,11 +1,17 @@
-import './styles/global.css'
+import { BoardGame } from './components/BoardGame';
+import { GlobalColors } from './styles/colors';
+import { GlobalStyle } from './styles/global';
+import { Reset } from './styles/reset';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
-  );
+    <>
+      <GlobalColors/>
+      <GlobalStyle/>
+      <BoardGame/> 
+      <Reset/>
+    </>
+   );
 }
 
 export default App;
