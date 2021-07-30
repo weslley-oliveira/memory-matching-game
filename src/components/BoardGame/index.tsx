@@ -1,10 +1,19 @@
 import { CardGame } from "../CardGame"
-import  { Container }  from "./style"
+import { HeaderGame } from "../HeaderGame"
+import  { BoardCard, Container }  from "./style"
 
 export function BoardGame(){
     return(
-        <Container>            
-            <CardGame/>
+        <Container>
+            <HeaderGame/>
+            <BoardCard>          
+                <CardGame/>
+                <CardGame/>
+                <CardGame/>
+                <CardGame/>
+                <CardGame/>
+                <CardGame/>
+            </BoardCard>  
         </Container>
     )
 }
