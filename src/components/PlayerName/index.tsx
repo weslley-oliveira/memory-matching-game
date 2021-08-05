@@ -1,7 +1,9 @@
+import { Content } from "./style";
+
 interface PlayerNameProps {
-    name: string;
+    children: string;
 }
 
-export function PlayerName({name}: PlayerNameProps) {
-    return <p>{name}</p>  
+export function PlayerName({children}: PlayerNameProps) {
+    return <Content>{children}</Content>  
 }

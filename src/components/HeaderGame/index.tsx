@@ -5,9 +5,22 @@ import { Container } from "./style";
 export function HeaderGame(){
     return(
         <Container>
-            <PlayerName name={"Player 1"}/>
-            <PlayerName name={"Player 2"}/>
-            <ScoreGame/>
-        </Container>        
+            <div className="players">
+                <div>
+                    <PlayerName>
+                        Player 1 
+                    </PlayerName>
+                    <ScoreGame points={3}/>
+                </div>                
+                <p>vs</p>
+                <div>
+                    <PlayerName> 
+                        Player 2
+                    </PlayerName>
+                    <ScoreGame points={2}/>
+                </div>                
+            </div>
+        </Container>    
+          
     )
 }
