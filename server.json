@@ -1,12 +1,19 @@
 {
-    "teste": [
+    "card-game": [
       {
-        "test": 3,
+        "name": "html",
+        "img": "logo-html.png",
         "id": 1
       },
       {
-        "teste": 4,
+        "name": "css",
+        "img": "logo-css.png",
         "id": 2
+      },
+      {
+        "name": "javascript",
+        "img": "logo-javascript.png",
+        "id": 3
       }
     ]
   }

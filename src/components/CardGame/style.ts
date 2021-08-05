@@ -1,32 +1,51 @@
 import styled from "styled-components";
 
-export const CardFront = styled.div`
+export const Content = styled.div`
     width: 130px;
-    height: 160px;
-    background-color: var(--card-back);
+    height: 160px;    
+    perspective: 1000px;
+    cursor: pointer;
 
-    border: solid 4px var(--font-color);
-    border-radius: 12px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    
-    img {
-        width: 90px;
-        height: 90px;
-        
-        filter: brightness(0.8);        
-        border-radius: 100%;
+    .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
     }
-`
 
-export const CardBack = styled.div`
-    width: 130px;
-    height: 160px;
-    background-color: var(--card-front);
+    .active{
+    transform: rotateY(180deg);
+    }    
 
-    border: solid 4px var(--font-color);
-    border-radius: 12px;
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border: solid 4px var(--font-color);
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flip-card-front {
+        background-color: var(--card-back);
+        color: black;
+        img {
+            width: 90px;
+            height: 90px;
+            
+            filter: brightness(0.8);        
+            border-radius: 100%;
+        }
+    }
+
+    .flip-card-back {
+        background-color: var(--card-front);
+        transform: rotateY(180deg);
+    }
 `
