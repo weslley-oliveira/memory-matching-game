@@ -17,8 +17,6 @@ export function CardGame({ img, name }:CardGameProps ) {
         }, 1000);
     }
 
-    console.log(img)
-
     return(
         <Content onClick={handleCard}>
             <div className={`flip-card-inner ${active}`}>
