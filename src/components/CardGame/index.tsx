@@ -4,10 +4,11 @@ import { useState } from "react";
 
 interface CardGameProps {
     img: string,
-    name: string
+    name: string,
+    matching: boolean,
 }
 
-export function CardGame({ img, name }:CardGameProps ) { 
+export function CardGame({ img, name, matching }:CardGameProps ) { 
     const [active, setActive] = useState('')
 
     function handleCard() {
@@ -19,7 +20,7 @@ export function CardGame({ img, name }:CardGameProps ) {
 
     return(
         <Content onClick={handleCard}>
-            <div className={`flip-card-inner ${active}`}>
+            <div className={`flip-card-inner ${active} ${matching && 'matching'}`}>
                 <div className="flip-card-front">
                     <img src={profileImg} alt="profile pic"/>
                 </div>

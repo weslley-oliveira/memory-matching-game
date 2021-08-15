@@ -16,7 +16,11 @@ export const Content = styled.div`
     }
 
     .active{
-    transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+    .matching{
+        opacity: 0.5;
     }    
 
     .flip-card-front, .flip-card-back {
