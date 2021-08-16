@@ -11,25 +11,35 @@ interface Cards {
     matching: boolean;
 }
 
-interface Players {
-    name: string;
-    points: number;
-}
-
 interface Matching {
     id: Number;
     index: Number;
+}
+
+interface Players {
+    id: number;
+    name: string;
+    points: number;
+    turn: boolean;
 }
 
 export function BoardGame(){
     const [cards, setCards] = useState<Cards[]>([])
     const [randomCards, setRandomCards] = useState<Cards[]>([])
     const [selected, setSelected] = useState<Matching[]>([])
+
+    const [players, setPlayers] = useState<Players[]>([])
     
     //get cards
     useEffect(()=>{
         api.get('card-game')
             .then(response => setCards(response.data));        
+    },[])
+
+    //get players
+    useEffect(()=>{
+        api.get('players')
+            .then(response => setPlayers(response.data));        
     },[])
 
     // initialize new game
@@ -58,19 +68,8 @@ export function BoardGame(){
         setRandomCards(newCards)
     }
 
-    function handleClick(id:Number,index:Number) {
-        console.log('ID', id)
-        console.log('Index', index)
-
-        function isEmptySelected(selected : Object) {
-            var name;
-            for (name in selected) {
-              return false;
-            }
-            return true;
-          }
-
-
+    function handleClick(id:Number,index:Number) { 
+              
         if(selected.length === 0){
             console.log('Was Empyt')          
             setSelected([{ 
@@ -84,7 +83,9 @@ export function BoardGame(){
             if(matchIndex?.index !== index){
                 if(matchId?.id === id){
                     matching(id)
-                } else {
+                    setSelected([])
+                } else {                    
+                    yourTurn(id)
                     setSelected([{ 
                         id:id,
                         index: index
@@ -92,33 +93,12 @@ export function BoardGame(){
                 }
             }else {
                 console.log('voce ja clicou aqui')
-            }
-            
+            }            
         }
-        
-        
-
-        // if(selected === 0){
-        //     setSelected(card.id)
-        // } else {
-        //     if(selected === card.id) { // if(selected === 0){
-        //     setSelected(card.id)
-        // } else {
-        //     if(selected === card.id) {
-
-        //         matching(card.id)
-        //     } else {
-        //         setSelected(card.id)               
-        //     }
-        // }
-        //     } else {
-        //         setSelected(card.id)               
-        //     }
-        // }
     }
 
     function matching(id:Number) {
-        console.log('deu certo')
+        console.log('nice job')
         const matchingUpdate = randomCards.map((item)=> { 
             if(item.id === id) {                      
                 const update = {
@@ -132,16 +112,47 @@ export function BoardGame(){
         )
        setRandomCards(matchingUpdate)
     }
+
+    function yourTurn(id:Number) {
+        
+
+        const select = randomCards.find( card => card.id === id )
+
+        if(!select?.matching){
+            const matchingUpdate = players.map((item)=> { 
+                if(item.turn === false) {                      
+                    const update = {
+                      ...item,
+                      turn: true,
+                    }
+                    return update
+                } else {
+                    const update = {
+                        ...item,
+                        turn: false,
+                      }
+                      return update
+    
+                }
+                return item 
+              }        
+            )
+           setPlayers(matchingUpdate)
+        }else{
+            console.log('carta clicada')
+        }
+
+        
+    }
        
     return(
         <Container>
-            <HeaderGame/>
+            <HeaderGame players={players}/>
             <BoardCard>          
                 {randomCards?.map((card, index) => (
                     <div 
                         key={index} 
                         onClick={() => handleClick(card.id, index)}
-                        className={`${card.matching && 'clicado'}`}
                     >                
                         <CardGame name={card.name} img={`images/${card.img}`} matching={card.matching}/>
                     </div>

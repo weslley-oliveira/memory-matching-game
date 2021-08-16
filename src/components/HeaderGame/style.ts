@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 
     .players {
         display: flex;
@@ -11,9 +11,12 @@ export const Container = styled.header`
         
     }
     .active {
-        border: solid 1px black;
+        border: solid 1px var(--player-score);
+        padding: 1rem;
+        border-radius: 12px;
     }
-    p {
+    p { 
+        text-align: center;
         font-size: 10px;
     }
     
