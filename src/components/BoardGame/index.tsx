@@ -3,6 +3,7 @@ import { api } from "../../services/api"
 import { CardGame } from "../CardGame"
 import { HeaderGame } from "../HeaderGame"
 import { BoardCard, Container }  from "./style"
+import Modal from 'react-modal';
 
 interface Cards {
     id: number;
@@ -29,11 +30,14 @@ export function BoardGame(){
     const [selected, setSelected] = useState<Matching[]>([])
 
     const [players, setPlayers] = useState<Players[]>([])
+
+    const [modalIsOpen, setIsOpen] = useState(false);
     
     //get cards
     useEffect(()=>{
         api.get('card-game')
-            .then(response => setCards(response.data));        
+            .then(response => setCards(response.data)); 
+            newGame()       
     },[])
 
     //get players
@@ -43,7 +47,16 @@ export function BoardGame(){
     },[])
 
     useEffect(()=>{
-          console.log("MECHERAM")
+        if(randomCards.length >= 1){
+            const result = randomCards.find( card => card.matching === false );
+            if(!result){
+                setTimeout(() => {                   
+                    setIsOpen(true);
+                    newGame()
+                }, 1000);
+                
+            }
+        }
     },[randomCards])
 
     // initialize new game
@@ -102,6 +115,7 @@ export function BoardGame(){
     }
 
     function matching(id:Number) {
+        
         console.log('nice job')        
         const matchingUpdate = randomCards.map((item)=> { 
             if(item.id === id) {                      
@@ -114,9 +128,12 @@ export function BoardGame(){
             return item 
           }        
         )
+
+        
        setRandomCards(matchingUpdate)
        setSelected([])
        addPoints()
+       
     }
 
     function addPoints() {
@@ -162,6 +179,15 @@ export function BoardGame(){
     }
        
     return(
+        <>
+        <Modal
+        isOpen={modalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        // onRequestClose={closeModal}
+        // style={customStyles}
+        contentLabel="Example Modal"
+      > teste</Modal>
+        
         <Container>
             <HeaderGame players={players}/>
             <BoardCard>          
@@ -176,5 +202,6 @@ export function BoardGame(){
             </BoardCard>  
             <button onClick={newGame}>New Game</button>
         </Container>
+        </>
     )
 }

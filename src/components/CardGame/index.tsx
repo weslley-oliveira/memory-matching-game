@@ -2,6 +2,7 @@ import { Content } from "./style";
 import profileImg from '../../assets/profile.jpg'
 import { useState } from "react";
 
+
 interface CardGameProps {
     img: string,
     name: string,
