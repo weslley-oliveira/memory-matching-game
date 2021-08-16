@@ -6,7 +6,7 @@ export function HeaderGame(){
     return(
         <Container>
             <div className="players">
-                <div>
+                <div className={`active`}>
                     <PlayerName>
                         Player 1 
                     </PlayerName>

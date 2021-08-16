@@ -1,16 +1,19 @@
 {
     "card-game": [
       {
+        "matching": false,
         "name": "html",
         "img": "logo-html.png",
         "id": 1
       },
-      {
+      { 
+        "matching": false,
         "name": "css",
         "img": "logo-css.png",
         "id": 2
       },
-      {
+      { 
+        "matching": false,
         "name": "javascript",
         "img": "logo-javascript.png",
         "id": 3

@@ -20,8 +20,8 @@ export function CardGame({ img, name, matching }:CardGameProps ) {
 
     return(
         <Content onClick={handleCard}>
-            <div className={`flip-card-inner ${active} ${matching && 'matching'}`}>
-                <div className="flip-card-front">
+            <div className={`flip-card-inner ${active}`}>
+                <div className={`flip-card-front ${matching && 'matching'}`} >
                     <img src={profileImg} alt="profile pic"/>
                 </div>
                 <div className="flip-card-back">

@@ -8,8 +8,11 @@ export const Container = styled.header`
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        
     }
-
+    .active {
+        border: solid 1px black;
+    }
     p {
         font-size: 10px;
     }
