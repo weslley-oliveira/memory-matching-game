@@ -98,7 +98,7 @@ export function BoardGame(){
     }
 
     function matching(id:Number) {
-        console.log('nice job')
+        console.log('nice job')        
         const matchingUpdate = randomCards.map((item)=> { 
             if(item.id === id) {                      
                 const update = {
@@ -111,11 +111,26 @@ export function BoardGame(){
           }        
         )
        setRandomCards(matchingUpdate)
+       addPoints()
+    }
+
+    function addPoints() {
+              
+        const playerUpdate = players.map((item)=> { 
+            if(item.turn === true) {                      
+                const update = {
+                  ...item,
+                  points: item.points + 1,
+                }
+                return update
+            } 
+            return item 
+            }        
+        )
+       setPlayers(playerUpdate)
     }
 
     function yourTurn(id:Number) {
-        
-
         const select = randomCards.find( card => card.id === id )
 
         if(!select?.matching){
@@ -131,18 +146,14 @@ export function BoardGame(){
                         ...item,
                         turn: false,
                       }
-                      return update
-    
+                      return update    
                 }
-                return item 
               }        
             )
            setPlayers(matchingUpdate)
         }else{
             console.log('carta clicada')
         }
-
-        
     }
        
     return(

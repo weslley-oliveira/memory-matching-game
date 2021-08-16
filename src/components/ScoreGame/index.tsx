@@ -8,9 +8,9 @@ interface ScoreGameProps {
 export function ScoreGame({ points }: ScoreGameProps) {
     return ( 
         <Content>
-            <div className={`${points >= 1 && 'active'}`}></div>
-            <div className={`${points >= 2 && 'active'}`}></div>
-            <div className={`${points >= 3 && 'active'}`}></div>        
+            <div className={`${points >= 1 && 'point'}`}></div>
+            <div className={`${points >= 2 && 'point'}`}></div>
+            <div className={`${points >= 3 && 'point'}`}></div>        
         </Content>
     )
 }

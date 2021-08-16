@@ -10,9 +10,10 @@ export const Content = styled.div`
         width: 25px;
         height: 25px;
         border: solid 2px var(--font-color);
-        border-radius: 100%;
+        border-radius: 100%;        
     }
-    .active{
+    .point {
         background-color: var(--player-score);       
     }
+
 `
