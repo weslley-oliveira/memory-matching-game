@@ -67,8 +67,10 @@ export function BoardGame(){
         }
 
         randomList()
-       
-        setSelected([])
+        
+        setPlayers([])
+        api.get('players')
+        .then(response => setPlayers(response.data));
         setRandomCards(newCards)
     }
 

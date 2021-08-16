@@ -20,6 +20,7 @@ export const Container = styled.header`
     p { 
         text-align: center;
         font-size: 10px;
+        padding-bottom: 10px;
     }
     
     
