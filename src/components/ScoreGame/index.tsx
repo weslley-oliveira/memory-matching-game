@@ -1,16 +1,33 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
 import { Content } from "./style"
 
 interface ScoreGameProps {
     points : number;
 }
 
+interface Cards {
+    id: number;
+    name: string;
+    img: string;
+    matching: boolean;
+}
+
 export function ScoreGame({ points }: ScoreGameProps) {
+    const [cards, setCards] = useState<Cards[]>([])
+
+    useEffect(()=>{
+        api.get('card-game')
+            .then(response => setCards(response.data));        
+    },[])
+        
+    const fatored = (points/cards.length)*100   
+
     return ( 
         <Content>
-            <div className={`${points >= 1 && 'point'}`}></div>
-            <div className={`${points >= 2 && 'point'}`}></div>
-            <div className={`${points >= 3 && 'point'}`}></div>        
+            <div className="score">
+                <div style={{width:`${fatored}%`}}></div>
+            </div>                    
         </Content>
     )
 }

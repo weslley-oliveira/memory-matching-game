@@ -14,7 +14,6 @@ interface HeraderGameProps {
 }
 
 export function HeaderGame({ players }: HeraderGameProps){
-    console.log(players)
     return(
         <Container>
             <p>vs</p>

@@ -6,14 +6,14 @@ export const Content = styled.div`
     gap: 5px;
     padding-top: 5px;
 
-    div {
-        width: 25px;
+    .score {
+        width: 100%;
         height: 25px;
         border: solid 2px var(--font-color);
-        border-radius: 100%;        
-    }
-    .point {
-        background-color: var(--player-score);       
+        div {
+            height: 100%;
+            background-color: var(--player-score);       
+        }
     }
 
 `

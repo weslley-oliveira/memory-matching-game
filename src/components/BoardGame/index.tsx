@@ -42,6 +42,10 @@ export function BoardGame(){
             .then(response => setPlayers(response.data));        
     },[])
 
+    useEffect(()=>{
+          console.log("MECHERAM")
+    },[randomCards])
+
     // initialize new game
     function newGame(){
 
@@ -70,8 +74,7 @@ export function BoardGame(){
 
     function handleClick(id:Number,index:Number) { 
               
-        if(selected.length === 0){
-            console.log('Was Empyt')          
+        if(selected.length === 0){                      
             setSelected([{ 
                 id:id,
                 index: index
@@ -82,8 +85,7 @@ export function BoardGame(){
             
             if(matchIndex?.index !== index){
                 if(matchId?.id === id){
-                    matching(id)
-                    setSelected([])
+                    matching(id)                    
                 } else {                    
                     yourTurn(id)
                     setSelected([{ 
@@ -111,6 +113,7 @@ export function BoardGame(){
           }        
         )
        setRandomCards(matchingUpdate)
+       setSelected([])
        addPoints()
     }
 
