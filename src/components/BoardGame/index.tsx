@@ -30,14 +30,14 @@ export function BoardGame(){
     const [selected, setSelected] = useState<Matching[]>([])
 
     const [players, setPlayers] = useState<Players[]>([])
+    const [winner, setWinner] = useState('')
 
     const [modalIsOpen, setIsOpen] = useState(false);
     
     //get cards
     useEffect(()=>{
         api.get('card-game')
-            .then(response => setCards(response.data)); 
-            newGame()       
+            .then(response => setCards(response.data));        
     },[])
 
     //get players
@@ -47,12 +47,17 @@ export function BoardGame(){
     },[])
 
     useEffect(()=>{
-        if(randomCards.length >= 1){
+        if(randomCards.length >= 1){            
             const result = randomCards.find( card => card.matching === false );
             if(!result){
+                players.map((item)=> { 
+                    if(item.turn === true) {  
+                        setWinner(item.name)
+                    }    
+                  }        
+                )
                 setTimeout(() => {                   
                     setIsOpen(true);
-                    newGame()
                 }, 1000);
                 
             }
@@ -62,6 +67,7 @@ export function BoardGame(){
     // initialize new game
     function newGame(){
 
+        setIsOpen(false)
         let newCards = [
             ...cards,
             ...cards,
@@ -180,15 +186,19 @@ export function BoardGame(){
        
     return(
         <>
-        <Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        // onRequestClose={closeModal}
-        // style={customStyles}
-        contentLabel="Example Modal"
-      > teste</Modal>
         
         <Container>
+            <Modal
+            isOpen={modalIsOpen}         
+            className="modal-content"
+            overlayClassName="modal-overlay"
+            contentLabel="Winner"
+            > 
+                <h1>{winner}</h1>
+                <strong>Winner!!!</strong>
+                <img src="/images/winner.png" alt="winner"/>
+                <button onClick={newGame}>restart</button>            
+            </Modal>
             <HeaderGame players={players}/>
             <BoardCard>          
                 {randomCards?.map((card, index) => (
