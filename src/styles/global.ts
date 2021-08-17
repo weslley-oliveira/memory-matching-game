@@ -7,12 +7,7 @@ export const GlobalStyle = createGlobalStyle`
 		font-family: 'Press Start 2P', cursive;
 		color: white;
 	}
-
-	body {
-		display: flex;
-		justify-content: center;
-	}
-
+		
 	.modal-overlay{
 		background: rgba(0, 0, 0, 0.8);
         
@@ -39,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
         background-color: var(--board-game);
 		border: solid 4px var(--font-color);
 		border-radius: 12px;
+		text-align: center;
 
 		strong{
 			font-size: 1.75rem;
@@ -58,6 +54,8 @@ export const GlobalStyle = createGlobalStyle`
 			border-radius: 12px;
 		}
     }
+
+	
 
 	
 	

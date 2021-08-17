@@ -2,7 +2,7 @@ import { useState ,useEffect } from "react"
 import { api } from "../../services/api"
 import { CardGame } from "../CardGame"
 import { HeaderGame } from "../HeaderGame"
-import { BoardCard, Container }  from "./style"
+import { Container, Content }  from "./style"
 import Modal from 'react-modal';
 
 interface Cards {
@@ -34,10 +34,14 @@ export function BoardGame(){
 
     const [modalIsOpen, setIsOpen] = useState(false);
     
+    console.log('observatorio', randomCards)
     //get cards
     useEffect(()=>{
         api.get('card-game')
-            .then(response => setCards(response.data));        
+            .then(response => setCards(response.data));
+        if(randomCards.length === 0){
+            setIsOpen(true)
+        }        
     },[])
 
     //get players
@@ -185,33 +189,43 @@ export function BoardGame(){
     }
        
     return(
-        <>
-        
-        <Container>
+        <Content>
             <Modal
             isOpen={modalIsOpen}         
             className="modal-content"
             overlayClassName="modal-overlay"
             contentLabel="Winner"
-            > 
-                <h1>{winner}</h1>
-                <strong>Winner!!!</strong>
-                <img src="/images/winner.png" alt="winner"/>
-                <button onClick={newGame}>restart</button>            
+            > {!winner? 
+                    <>
+                        <h1>Well Come to</h1>
+                        <strong>Matching Game</strong>                
+                    </>
+                        :
+                    <>
+                        <h1>{winner}</h1>
+                        <strong>Winner!!!</strong>
+                        <img src="/images/winner.png" alt="winner"/>
+                    </>
+                }                
+                <button onClick={newGame}>
+                    {!winner? 'Start': 'Restart'}
+                </button>            
             </Modal>
-            <HeaderGame players={players}/>
-            <BoardCard>          
-                {randomCards?.map((card, index) => (
-                    <div 
-                        key={index} 
-                        onClick={() => handleClick(card.id, index)}
-                    >                
-                        <CardGame name={card.name} img={`images/${card.img}`} matching={card.matching}/>
-                    </div>
-                ))}                
-            </BoardCard>  
-            <button onClick={newGame}>New Game</button>
-        </Container>
-        </>
+            {randomCards.length>= 1 && 
+            <Container>
+                <HeaderGame players={players}/>
+                <div className="board-card">          
+                    {randomCards?.map((card, index) => (
+                        <div 
+                            key={index} 
+                            onClick={() => handleClick(card.id, index)}
+                        >                
+                            <CardGame name={card.name} img={`images/${card.img}`} matching={card.matching}/>
+                        </div>
+                    ))}                
+                </div>
+            </Container>
+            }
+        </Content>
     )
 }

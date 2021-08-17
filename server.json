@@ -17,6 +17,12 @@
         "name": "javascript",
         "img": "logo-javascript.png",
         "id": 3
+      },
+      { 
+        "matching": false,
+        "name": "bob",
+        "img": "bob.png",
+        "id": 4
       }
    
     ],

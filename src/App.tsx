@@ -11,7 +11,7 @@ function App() {
     <>
       <GlobalColors/>
       <GlobalStyle/>
-      <BoardGame/> 
+      <BoardGame/>
       <Reset/>
     </>
    );
